@@ -449,10 +449,11 @@ static int fatfs_mount(struct fs_mount_t *mountp)
 	FRESULT res;
 
 	res = f_mount((FATFS *)mountp->fs_data, translate_path(mountp->mnt_point), 1);
-
+	printk("f_mount res = %d\n: res");
 #if defined(CONFIG_FS_FATFS_MOUNT_MKFS)
 	if (res == FR_NO_FILESYSTEM &&
 	    (mountp->flags & FS_MOUNT_FLAG_READ_ONLY) != 0) {
+			printk("flags: %x", mountp->flags);
 		return -EROFS;
 	}
 	/* If no file system found then create one */
@@ -478,7 +479,6 @@ static int fatfs_mount(struct fs_mount_t *mountp)
 	if (res == FR_OK) {
 		mountp->flags |= FS_MOUNT_FLAG_USE_DISK_ACCESS;
 	}
-
 	return translate_error(res);
 
 }

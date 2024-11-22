@@ -25,16 +25,19 @@
 #if defined(CONFIG_DISK_DRIVER_MMC)
 #define DISK_DRIVE_NAME "SD2"
 #else
-#define DISK_DRIVE_NAME "SD"
+#define DISK_DRIVE_NAME "ramdisk0"
 #endif
 
-#define DISK_MOUNT_PT "/"DISK_DRIVE_NAME":"
+#define DISK_MOUNT_PT "/SD:"
 
 static FATFS fat_fs;
 /* mounting info */
 static struct fs_mount_t mp = {
 	.type = FS_FATFS,
 	.fs_data = &fat_fs,
+	.flags = FS_MOUNT_FLAG_NO_FORMAT,
+	.storage_dev = (void *)DISK_DRIVE_NAME,
+	.mnt_point = "/SD",
 };
 
 #elif defined(CONFIG_FILE_SYSTEM_EXT2)
@@ -140,6 +143,7 @@ int main(void)
 
 		memory_size_mb = (uint64_t)block_count * block_size;
 		printk("Memory Size(MB) %u\n", (uint32_t)(memory_size_mb >> 20));
+		printk("Memory Size(B) %u\n", (uint32_t)(memory_size_mb));
 
 		if (disk_access_ioctl(disk_pdrv,
 				DISK_IOCTL_CTRL_DEINIT, NULL) != 0) {
