@@ -47,6 +47,17 @@
 		zephyr,canbus = &can0;
 	};
 
+	block0: dram0@DT_DRAM_BASE {
+		compatible = "zephyr,ram-disk";
+		disk-name = "RAM";
+		sector-size = <(512)>;
+		sector-count = <(512)>;
+		ram-region = <&dram0>;
+		reg = <DT_DRAM_BASE DT_DRAM_SIZE>;  // 8KB RAM disk for FS operations
+		label = "ramdisk0";
+		status = "okay";
+	};
+
 	pcie0: pcie0 {
 		#address-cells = <1>;
 		#size-cells = <1>;

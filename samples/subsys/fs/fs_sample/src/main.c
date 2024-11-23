@@ -25,7 +25,7 @@
 #if defined(CONFIG_DISK_DRIVER_MMC)
 #define DISK_DRIVE_NAME "SD2"
 #else
-#define DISK_DRIVE_NAME "ramdisk0"
+#define DISK_DRIVE_NAME "RAM"
 #endif
 
 #define DISK_MOUNT_PT "/SD:"

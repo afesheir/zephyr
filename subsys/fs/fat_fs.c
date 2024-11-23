@@ -467,11 +467,13 @@ static int fatfs_mount(struct fs_mount_t *mountp)
 			.n_root = CONFIG_FS_FATFS_MAX_ROOT_ENTRIES,
 			.au_size = 0		/* Auto calculate cluster size */
 		};
-
 		res = f_mkfs(translate_path(mountp->mnt_point), &mkfs_opt, work, sizeof(work));
+
 		if (res == FR_OK) {
+
 			res = f_mount((FATFS *)mountp->fs_data,
 					translate_path(mountp->mnt_point), 1);
+
 		}
 	}
 #endif /* CONFIG_FS_FATFS_MOUNT_MKFS */
