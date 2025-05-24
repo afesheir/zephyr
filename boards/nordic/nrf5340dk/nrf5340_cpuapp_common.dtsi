@@ -48,6 +48,26 @@
 		};
 	};
 
+	sevensegment: seven_segment_display {
+		compatible = "aiteai,digdisplay";
+		digits = <4>;
+		polarity = "ACTIVE_HIGH";
+		segments-gpios = <&gpio1 0 GPIO_ACTIVE_HIGH>,	// D0
+						 <&gpio1 1 GPIO_ACTIVE_HIGH>,	// D1
+						 <&gpio1 4 GPIO_ACTIVE_HIGH>,	// D2
+						 <&gpio1 5 GPIO_ACTIVE_HIGH>,	// D3
+						 <&gpio1 6 GPIO_ACTIVE_HIGH>,	// D4
+						 <&gpio1 7 GPIO_ACTIVE_HIGH>,	// D5
+						 <&gpio1 8 GPIO_ACTIVE_HIGH>,	// D6
+						 <&gpio1 9 GPIO_ACTIVE_HIGH>;	// D7
+
+		digits-gpios = <&gpio1 10 GPIO_ACTIVE_HIGH>,		// D8
+					   <&gpio1 11 GPIO_ACTIVE_HIGH>,		// D9
+					   <&gpio1 12 GPIO_ACTIVE_HIGH>,		// D10
+					   <&gpio1 13 GPIO_ACTIVE_HIGH>;		// D11
+		status = "okay";
+	};
+
 	/* These aliases are provided for compatibility with samples */
 	aliases {
 		pwm-led0 = &pwm_led0;
